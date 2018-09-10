@@ -45,6 +45,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# somewhy not installed by make
+cd build
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -p flatc flathash $RPM_BUILD_ROOT%{_bindir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -58,6 +63,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/flatc
+%attr(755,root,root) %{_bindir}/flathash
 %{_includedir}/flatbuffers
 %{_libdir}/cmake/flatbuffers
 %{_libdir}/libflatbuffers.so
