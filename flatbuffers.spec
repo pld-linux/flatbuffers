@@ -45,6 +45,16 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/flatc
+%attr(755,root,root) %{_libdir}/libflatbuffers.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libflatbuffers.so.1
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/flatbuffers
+%{_libdir}/cmake/flatbuffers
+%{_libdir}/libflatbuffers.so
