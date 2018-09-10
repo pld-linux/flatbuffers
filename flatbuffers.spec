@@ -1,11 +1,13 @@
 Summary:	Memory efficient serialization library
 Name:		flatbuffers
 Version:	1.9.0
-Release:	0.1
+Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/google/flatbuffers/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	8be7513bf960034f6873326d09521a4b
+Patch0:		https://github.com/google/flatbuffers/pull/4698.patch
+# Patch0-md5:	f72d57f8befcb0052349a7d9a0df3f24
 URL:		https://google.github.io/flatbuffers/
 BuildRequires:	cmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,6 +28,7 @@ Header files for %{name} library.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d build
