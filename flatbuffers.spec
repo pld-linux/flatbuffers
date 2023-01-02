@@ -1,15 +1,13 @@
 Summary:	Memory efficient serialization library
 Name:		flatbuffers
-Version:	1.9.0
+Version:	22.12.06
 Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/google/flatbuffers/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8be7513bf960034f6873326d09521a4b
-Patch0:		https://github.com/google/flatbuffers/pull/4698.patch
-# Patch0-md5:	f72d57f8befcb0052349a7d9a0df3f24
+# Source0-md5:	33977086e1e28bb73c53cdf0d0584eac
 URL:		https://google.github.io/flatbuffers/
-BuildRequires:	cmake
+BuildRequires:	cmake >= 3.16
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -28,7 +26,6 @@ Header files for %{name} library.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 install -d build
@@ -59,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libflatbuffers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libflatbuffers.so.1
+%attr(755,root,root) %ghost %{_libdir}/libflatbuffers.so.22
 
 %files devel
 %defattr(644,root,root,755)
@@ -68,3 +65,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/flatbuffers
 %{_libdir}/cmake/flatbuffers
 %{_libdir}/libflatbuffers.so
+%{_pkgconfigdir}/flatbuffers.pc
