@@ -8,6 +8,7 @@ Source0:	https://github.com/google/flatbuffers/archive/v%{version}/%{name}-%{ver
 # Source0-md5:	33977086e1e28bb73c53cdf0d0584eac
 URL:		https://google.github.io/flatbuffers/
 BuildRequires:	cmake >= 3.16
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
