@@ -1,4 +1,5 @@
 Summary:	Memory efficient serialization library
+Summary(pl.UTF-8):	Wydajna pamięciowo biblioteka do serializacji
 Name:		flatbuffers
 Version:	22.12.06
 Release:	1
@@ -17,13 +18,22 @@ C++, C#, C, Go, Java, JavaScript, Lobster, Lua, TypeScript, PHP,
 Python, and Rust. It was originally created at Google for game
 development and other performance-critical applications.
 
+%description -l pl.UTF-8
+FlatBuffers to wydajna, wieloplatformowa biblioteka do serializacji
+dla języków C++, C#, C, Go, Java, JavaScript, Lobster, Lua,
+TypeScript, PHP, Python i Rust. Powstała oryginalnie w Google na
+potrzeby tworzenia gier i innych aplikacji krytycznych wydajnościowo.
+
 %package devel
-Summary:	Header files for %{name} library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki %{name}
+Summary:	Header files for FlatBuffers library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki FlatBuffers
 Group:		Development/Libraries
 
 %description devel
-Header files for %{name} library.
+Header files for FlatBuffers library.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki FlatBuffers.
 
 %prep
 %setup -q
