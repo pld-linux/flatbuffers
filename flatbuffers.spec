@@ -3,7 +3,7 @@ Name:		flatbuffers
 Version:	22.12.06
 Release:	1
 License:	Apache v2.0
-Group:		Applications
+Group:		Libraries
 Source0:	https://github.com/google/flatbuffers/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	33977086e1e28bb73c53cdf0d0584eac
 URL:		https://google.github.io/flatbuffers/
