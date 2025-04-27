@@ -1,14 +1,30 @@
+# TODO - other languages:
+# dart >= 2.17.0
+# go >= 1.19
+# java >= 1.8
+# kotlin
+# lobster
+# lua >= 5.1
+# C#
+# nim >= 1.4.0
+# PHP
+# Python (2, 3)
+# Rust
+# Swift
+# JavaScript/TypeScript
 Summary:	Memory efficient serialization library
 Summary(pl.UTF-8):	Wydajna pamięciowo biblioteka do serializacji
 Name:		flatbuffers
-Version:	22.12.06
+Version:	25.2.10
 Release:	1
 License:	Apache v2.0
 Group:		Libraries
+#Source0Download: https://github.com/google/flatbuffers/releases
 Source0:	https://github.com/google/flatbuffers/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	33977086e1e28bb73c53cdf0d0584eac
+# Source0-md5:	2153b63d029086c5ba5e943b4c6f0324
 URL:		https://google.github.io/flatbuffers/
-BuildRequires:	cmake >= 3.16
+BuildRequires:	cmake >= 3.8
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,22 +57,23 @@ Pliki nagłówkowe biblioteki FlatBuffers.
 %build
 install -d build
 cd build
-%cmake \
+%cmake .. \
+	-DFLATBUFFERS_BUILD_FLATHASH=ON \
 	-DFLATBUFFERS_BUILD_FLATLIB=OFF \
 	-DFLATBUFFERS_BUILD_SHAREDLIB=ON \
-	-DFLATBUFFERS_BUILD_TESTS=OFF \
-	..
+	-DFLATBUFFERS_BUILD_TESTS=OFF
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# somewhy not installed by make
-cd build
+# not installed by make
 install -d $RPM_BUILD_ROOT%{_bindir}
-install -p flatc flathash $RPM_BUILD_ROOT%{_bindir}
+install -p build/flathash $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -66,14 +83,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libflatbuffers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libflatbuffers.so.22
+%attr(755,root,root) %{_libdir}/libflatbuffers.so.%{version}
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/flatc
 %attr(755,root,root) %{_bindir}/flathash
+%{_libdir}/libflatbuffers.so
 %{_includedir}/flatbuffers
 %{_libdir}/cmake/flatbuffers
-%{_libdir}/libflatbuffers.so
 %{_pkgconfigdir}/flatbuffers.pc
